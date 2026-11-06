@@ -130,23 +130,6 @@ set beforehand: adopt it only if it gains at least 0.005.
 40-study development set, and the public LLM labels scored 0.868. A blend of the two reached 0.875 on
 those studies but 0.860 against 0.867 on the 18 untouched studies, so it was never trained on.
 
-## What went wrong, and what it taught
-
-- **Reading the wrong kind of "bad score."** A first DINOv2 submission scored exactly 0.500. The cause
-  was selecting a cache notebook in the submit dialog, whose only output was an all-0.5 placeholder.
-  Only submission-mode notebooks now write that file.
-- **A pipe deadlock that cost 8 hours.** The first blend run hung right after its first model loaded.
-  Model-loading progress bars had filled an output pipe that nothing was draining. The child process
-  now writes to a log file, and the leg has a time cap.
-- **Rehearsing at scale.** Memory limits and bad assumptions only show up at hidden-set scale, so every
-  submission path got a stand-in run first.
-- **Label work had diminishing returns.** Weeks of rule refinement raised label quality, but the biggest
-  gains came from pretrained encoders and showing the model more of each scan. A from-scratch 3D CNN on
-  those labels only reached 0.661.
-- **An unresolved caveat on the blend.** The 15% and 25% blends both scored the same to three decimals.
-  Kaggle shows no logs for scored runs, so it was never confirmed that the blend step actually ran on the
-  hidden set rather than falling back to the public result. A diagnostic was prepared but not submitted.
-
 ## Repository layout
 
 ```
@@ -214,7 +197,7 @@ Scripts that use the expert-label split need `python scripts/make_oa_split.py` f
 - **No generated notebooks or trained weights.** Generated notebooks embed dataset rows, so they are
   built locally instead.
 - **No third-party notebooks.** `third_party/README.md` shows how to fetch them.
-- **Redacted comments.** Some comments read `[redacted: ...]`, with a broad reason. They removed
+- **Redacted comments.** Some comments read `[redacted: ...]`. They removed
   quoted report text, study IDs, personal workflow notes and challenge-specific details. Challenge names
   remain in code only where a path or dataset ID needs them.
 
