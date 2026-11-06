@@ -1,0 +1,39 @@
+# Credentials
+kaggle.json
+*.token
+
+# Data (the dataset is restricted: never commit it or anything that embeds it)
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Checkpoints / artifacts
+*.ckpt
+*.pt
+*.pth
+checkpoints/
+wandb/
+mlruns/
+data/runs/
+data/external/
+
+# Python
+__pycache__/
+.pytest_cache/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+venv/
+*.egg-info/
+
+# OS
+.DS_Store
+
+# Generated notebooks embed dataset rows and study IDs; split files list study IDs
+kaggle_kernels/
+data/splits/
+
+# Other authors' notebooks are fetched, not redistributed (see third_party/README.md)
+third_party/*
+!third_party/README.md

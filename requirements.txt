@@ -1,0 +1,12 @@
+numpy
+scipy
+scikit-learn
+pydicom
+pytest
+langdetect
+torch
+transformers
+sentencepiece
+pandas
+ipython
+timm==1.0.26
